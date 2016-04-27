@@ -53,8 +53,8 @@ elseif (isset($_GET['get'])){
 		$interval = 3600;
 	}
 	/***************** FabFive! **************************/
-	/* We can modify just WHERE such that we produce a list of values on the days (for the moment) /time
-	   window that we choose */
+	/* We maintain the same data structure => no modify .js!!!!!!!!!!!!!!!!!!!!!*/
+	/* We can modify just WHERE such that we produce a list of values on the days window that we choose */
 	$query = "
 					SELECT  FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(timestamp)/600)*600) AS timekey,
 				SUM(event) as movement,
@@ -65,6 +65,22 @@ elseif (isset($_GET['get'])){
 				GROUP BY timekey
 				ORDER BY timekey ASC
 			";
+
+	/* We can modify just WHERE such that we produce a list of values on the days and time window that we choose
+	is sufficient to retrieve day and time intervals from data picker as the $interval and insert them in the query*/
+	/*
+	$query = "
+				SELECT  FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(timestamp)/600)*600) AS timekey,
+				SUM(event) as movement,
+				SUM(IF(event >0, event, 0)) as peoplein,
+				SUM(IF(event < 0, ABS(event), 0)) as peopleout
+				FROM     data
+                WHERE (DATE(timestamp) BETWEEN "2016-04-26" AND "2016-04-27") AND
+                (HOUR(timestamp) BETWEEN "13" AND "20")
+				GROUP BY timekey
+				ORDER BY timekey ASC
+			";
+	*/
 
 	$get = $DBH->prepare($query);
 	$get->execute();
