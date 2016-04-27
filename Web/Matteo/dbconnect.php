@@ -6,7 +6,7 @@
 	$db_host = "mysqlhost";
   // --------------------------------
 	try {
-		$DBH = new PDO('mysql:host='.$db_host.';dbname='.$db_name.,$db_user,$user_passwd);
+		$DBH = new PDO('mysql:host='.$db_host.';dbname='.$db_name,$db_user,$user_passwd);
 	} catch (PDOException $e) {
 		echo $e->getMessage();
 		exit;
