@@ -1,0 +1,34 @@
+// DB
+$dbtype = 'mysqli';
+$host = 'mysqlhost';
+$user = 'uc6weaoq_cSHou';
+$password = 'pCKmyi31';
+$db = 'uc6weaoq_cSHou';
+$dbprefix = 'jhost_';
+
+//FTP
+Host: matteoconti91.joomlafree.it or 81.31.147.19   
+Userid: uc6weaoq
+Password: pCKmyi31
+
+//backend
+admin
+RoomIO9876
+
+
+
+INSERT INTO data (timestamp,locationID,event) VALUES (now(),1,3)
+
+SELECT sum(event), timestamp FROM `data` 
+        WHERE UNIX_TIMESTAMP(timestamp) >= UNIX_TIMESTAMP(CURDATE()+' 00:00:00')
+        GROUP BY substring(timestamp,1,2)
+        
+        
+        SELECT sum(event), substring(timestamp,12,2) FROM `data` 
+        WHERE UNIX_TIMESTAMP(timestamp) >= UNIX_TIMESTAMP(CURDATE()+' 00:00:00')
+        GROUP BY substring(timestamp,12,2)
+        
+        
+        SELECT sum(event) AS window_tot, substring(timestamp,15,1) AS window FROM `data` 
+        WHERE UNIX_TIMESTAMP(timestamp) >= UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 HOUR_SECOND))
+        GROUP BY substring(timestamp,15,1)
