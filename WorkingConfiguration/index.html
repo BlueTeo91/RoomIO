@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>RoomIO - NTNU room statistics</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+    <link href="stylesheet.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="http://www.chartjs.org/assets/Chart.min.js"></script>  
+    <script src='main-events-kopi.js'></script>
+    <script src="bootstrap.min.js"></script>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href=""></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href=""><Strong>Gløshaugen</strong> </a></li>
+            <li><a href="#">Berg</a></li>
+            <li class="active" id ="elektro"><a href="#">Elektrobygget<span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Gamle fysikk</a></li>
+            <li><a href="#">Hovedbygningen</a></li>
+            <li><a href="#">kjelhuset</a></li>
+            <li><a href="#">Gamle fysikk</a></li>
+            <li><a href="#">P15</a></li>
+            <li><a href="#">Stripa</a></li>
+            <li><a href="#">Vannkraftlaboratoriet</a></li>
+            <li><a href="#">Produktdesign</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">RoomIO</h1>
+          <div id="stats">
+            <div class="mainDiv">
+              <h3>Sahara Lab</h3>
+              <select id='interval'>
+                <option value="300">5 mins</option>
+                <option value="600">10 mins</option>
+                <option value="900" selected>15 mins</option>
+                <option value="1800">30 mins</option>
+                <option value="3600">1 hour</option>
+                <option value="86400">1 day</option>
+              </select>
+              <div>
+                <div>
+                  <iframe src="cal.html"></iframe>
+                  <div class="graphs" align="center">
+                    <div>
+                      <h5 align="center" style="display:inline-block;">Today's total count:</h5>
+                      <h5 id="totalIn" style='margin-right: 10px;' class="numbers">0</h5>
+                      <h5 align="center" style="display:inline-block;">People Currently in The Room:</h5>
+                      <h5 id="currentNumber" class="numbers">0</h5>
+                    </div>
+                    <canvas style='margin-left: 5px; margin-right:5px' id="totalChart" width='900' height='300' ></canvas>
+                    <div style='margin-bottom: 10px;' id="totalLegend"></div>
+                  </div>
+                </div>
+                <!--<div>
+                  <h4>Movement</h4>-->
+                  <!--<div class="graphs" align="center">
+                    <div>
+                      <h5 class="people">People Entering:</h5>
+                      <h5 id="peopleIn" class="numbers">0</h5>
+                      <h5 class="people">People exiting:</h5>
+                      <h5 id="peopleOut" class="numbers">0</h5>
+                    </div>
+                    <canvas style='margin-left: 5px;' id="trafficChart" width='900' height='300'></canvas>
+                    <div style='margin-bottom: 10px;' id="trafficLegend"></div>
+                  </div>
+                </div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        $('#elektro').click(function(e) {
+          $('#stats').toggleClass('hidden');
+        });
+    </script>
+
+      </body>
+</html>
