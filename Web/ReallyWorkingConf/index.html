@@ -9,17 +9,17 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <title>RoomIO - NTNU room statistics</title>
+    <link href="cal.css" rel="stylesheet"> <!-- CAL CSS-->
     <link href="bootstrap.min.css" rel="stylesheet">
     <link href="ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="dashboard.css" rel="stylesheet">
     <link href="stylesheet.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="login_style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script> <!-- CAL JS-->
+    <script src="cal.js"></script> <!-- CAL JS-->
     <script src="http://www.chartjs.org/assets/Chart.min.js"></script>  
     <script src='main-events-kopi.js'></script>
     <script src="bootstrap.min.js"></script>
-    <script type="text/javascript" src="jquery-2.2.3.min.js"></script>
-    <script type="text/javascript" src="login_effect.js"></script>
   </head>
   <body>
 
@@ -38,8 +38,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Home</a></li>
             <li><a href="#">Help</a></li>
-            <!--<li><a href="#">Login</a></li>-->
-            <li><a id="show_login">Login</a></li>
+            <li><a href="#">Login</a></li>
           </ul>
         </div>
       </div>
@@ -77,7 +76,31 @@
               </select>
               <div>
                 <div>
-                  <iframe src="cal.html"></iframe>
+                  <div id="test" style="visibility: hidden"></div>
+                  <!--CALENDAR START-->
+                  <div id="container">
+                    <div class="row">
+                      <div class=".col-sm-4">
+                        <div class="date-picker"  data-date="2016/04/26" data-keyboard="true">
+                          <div class="date-container pull-left">
+                            <h4 class="weekday">Thuesday</h4>
+                            <h2 class="date">April 26th</h2>
+                            <h4 class="year pull-right">2016</h4>
+                          </div>
+                          <span data-toggle="datepicker" data-type="subtract" class="fa fa-angle-left"></span>
+                          <span data-toggle="datepicker" data-type="add" class="fa fa-angle-right"></span>
+                          <div class="input-group input-datepicker">
+                            <input type="text" class="form-control" data-format="YYYY/MM/DD" placeholder="YYYY/MM/DD">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Go!</button>
+                            </span>
+                          </div>
+                          <span data-toggle="calendar" class="fa fa-calendar"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  
+                  <!--CALENDAR STOP-->
                   <div class="graphs" align="center">
                     <div>
                       <h5 align="center" style="display:inline-block;">Today's total count:</h5>
@@ -113,16 +136,6 @@
           $('#stats').toggleClass('hidden');
         });
     </script>
-    
-    <div id = "loginform">
-      <form method = "post" action = "">
-        <p>Please login to RoomIO!!!</p>
-        <input type = "image" id = "close_login" src = "images/cancel.png">
-        <input type = "text" id = "login" placeholder = "Email Id" name = "uid">
-        <input type = "password" id = "password" name = "upass" placeholder = "***">
-        <input type = "submit" id = "dologin" value = "Register">
-      </form>  
-    </div>
 
       </body>
 </html>
