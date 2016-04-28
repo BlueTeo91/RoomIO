@@ -25,3 +25,13 @@ WHERE (DATE(timestamp) BETWEEN "2016-04-27" AND "2016-04-27") AND
 HOUR(timestamp) BETWEEN "13" AND "17")
 GROUP BY timekey
 ORDER BY timekey ASC
+
+
+SELECT  FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(timestamp)/300)*300) AS timekey,
+				SUM(event) as movement,
+				SUM(IF(event > 0, event, 0)) as peoplein,
+				SUM(IF(event < 0, ABS(event), 0)) as peopleout
+				FROM     data				
+                WHERE DATE(timestamp) BETWEEN "2016-04-28" AND "2016-04-28"
+				GROUP BY timekey
+				ORDER BY timekey ASC

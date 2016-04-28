@@ -5,6 +5,9 @@
 * Creation Date: 20-11-2014
 * Copyright: (c) 2015 by Watershed Arts Trust Ltd.
 */
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300);
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
 .mainDiv
 {
 	width: 100%;
@@ -19,6 +22,7 @@
 	height:20%;
 	/*border: 1px black solid;*/
 	margin-right: 5px;
+	margin-top: 7.5%;
 }
 .people
 {
@@ -33,9 +37,40 @@
 	display: inline-flex;
 	font-family: sans-serif;
 	font-size: 40px;
-	color: rgb(43, 129, 226);
+	color: #428bca;
 }
 h2
 {
 	font-family: sans-serif;
 }
+
+/*----------------------------------------------------------*/
+
+.styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 40px;
+   overflow: hidden;
+   font-family: 'Roboto', sans-serif;
+   width: 240px;
+   float: right;
+   margin-top: -12px;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 40px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+}
+
+
+.blue    { background-color: #428bca; }
+
+
+/* -------------------- Colors: Text */
+
+.blue select    { color: #fff; }
+
+

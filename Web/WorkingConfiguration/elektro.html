@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+  <title>RoomIO - NTNU room statistics</title>
+  <link href="cal.css" rel="stylesheet"> <!-- CAL CSS-->
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <link href="ie10-viewport-bug-workaround.css" rel="stylesheet">
+  <link href="dashboard.css" rel="stylesheet">
+  <link href="stylesheet.css" rel="stylesheet">
+  <script src="includes/jquery-2.2.3.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script> <!-- CAL JS-->
+  <script src="cal.js"></script> <!-- CAL JS-->
+  <script src="http://www.chartjs.org/assets/Chart.min.js"></script>  
+  <script src='main-events-kopi.js'></script>
+  <script src="bootstrap.min.js"></script>
+</head>
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href=""></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Help</a></li>
+          <li><a href="">Bob Bobson</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li ><a href=""><Strong>Gløshaugen</strong></a></li>
+          <li><a href="#">Berg</a></li>
+          <li class="active" id ="elektro"><a href="elektro.html">Elektrobygget <span class="sr-only">(current)</span></a>
+            <li style="margin-left:20px"><a href="#">EL1</a></li>
+            <li style="margin-left:20px"><a href="#">EL5</a></li>
+            <li style="margin-left:20px;"><a href="statistics.html">Sahara Lab</a></li>
+          </li>
+          <li><a href="#">Gamle fysikk</a></li>
+          <li><a href="#">Hovedbygningen</a></li>
+          <li><a href="#">kjelhuset</a></li>
+          <li><a href="#">Gamle fysikk</a></li>
+          <li><a href="#">P15</a></li>
+          <li><a href="#">Stripa</a></li>
+          <li><a href="#">Vannkraftlaboratoriet</a></li>
+          <li><a href="#">Produktdesign</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">RoomIO</h1>
+        <div id="stats">
+          <div class="mainDiv">
+            <!--<h3>Sahara Lab</h3>-->
+              <div style="position:relative;">
+                <img src="/images/F272_occupied.jpg" style="margin-left:5%;border-style:solid; border-width:2px;"/>
+                <a href="statistics.html" style="display:block; width:100px; height:90px; position:absolute; top:370px; left:470px;"></a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<script>
+    $('#elektro').click(function(e) {
+      $('#stats').toggleClass('hidden');
+    });
+    </script>-->
+
+  </body>
+</html>

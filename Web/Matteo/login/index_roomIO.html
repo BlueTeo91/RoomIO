@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+  <title>RoomIO - NTNU room statistics</title>
+  <link href="cal.css" rel="stylesheet"> <!-- CAL CSS-->
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <link href="ie10-viewport-bug-workaround.css" rel="stylesheet">
+  <link href="dashboard.css" rel="stylesheet">
+  <link href="stylesheet.css" rel="stylesheet">
+  <script src="includes/jquery-2.2.3.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script> <!-- CAL JS-->
+  <script src="cal.js"></script> <!-- CAL JS-->
+  <script src="http://www.chartjs.org/assets/Chart.min.js"></script>  
+  <script src='main-events-kopi.js'></script>
+  <script src="bootstrap.min.js"></script>
+  <!-- included files for Login form -->
+  <link rel="stylesheet" type="text/css" href="includes/login_style.css">
+  <script type="text/javascript" src="includes/login_effect.js"></script>
+</head>
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href=""></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <il class="nav navbar-nav navbar-right">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Help</a></li>
+          <li><a id="show_login">Sign In</a></il>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="login_container">
+    <div id = "loginform">
+      <form method = "post" action = "">
+        <p>Please login to RoomIO!!!</p>
+        <input type = "image" id = "close_login" src = "images/cancel.png">
+        <input type = "text" id = "login" placeholder = "Email Id" name = "uid">
+        <input type = "password" id = "password" name = "upass" placeholder = "***">
+        <input type = "submit" id = "dologin" value = "Register">
+      </form>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li><a href=""><Strong>Gløshaugen</strong> </a></li>
+          <li><a href="#">Berg</a></li>
+          <li class="active" id ="elektro"><a href="#">Elektrobygget<span class="sr-only">(current)</span></a>
+            <li style="margin-left:20px"><a href="#">EL1</a></li>
+            <li style="margin-left:20px"><a href="#">EL5</a></li>
+            <li style="margin-left:20px; text-decoration:underline"><a href="#"><strong>Sahara Lab</strong></a></li>
+          </li>
+          <li><a href="#">Gamle fysikk</a></li>
+          <li><a href="#">Hovedbygningen</a></li>
+          <li><a href="#">kjelhuset</a></li>
+          <li><a href="#">Gamle fysikk</a></li>
+          <li><a href="#">P15</a></li>
+          <li><a href="#">Stripa</a></li>
+          <li><a href="#">Vannkraftlaboratoriet</a></li>
+          <li><a href="#">Produktdesign</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">RoomIO</h1>
+        <div id="stats">
+          <div class="mainDiv">
+            <!--<h3>Sahara Lab</h3>-->
+            <div class="styled-select blue semi-square">
+              <select id='interval'>
+                <option value="300">5 minutes</option>
+                <option value="600">10 minutes</option>
+                <option value="900">15 minutes</option>
+                <option value="1800" selected>30 minutes</option>
+                <option value="3600">1 hour</option>
+                <option value="86400">1 day</option>
+              </select>
+            </div>
+            <div>
+              <div>
+                <div>
+                  <div id="startDate" style="visibility: hidden"></div>
+                  <div id="endDate" style="visibility: hidden"></div>
+                  <!--CALENDAR FROM START-->
+                  <div id="container">
+                    <div class="row">
+                      <div class=".col-sm-4">
+                        <h3 id="calh3">From</h3>
+                        <hr/>
+                        <div class="date-picker" id="from-date" data-date="2016/04/28" data-keyboard="true">
+                          <div class="date-container pull-left">
+                            <h4 class="weekday">Thursday</h4>
+                            <h2 class="date">April 28th</h2>
+                            <h4 class="year pull-right">2016</h4>
+                          </div>
+                          <span data-toggle="datepicker" data-type="subtract" class="fa fa-angle-left"></span>
+                          <span data-toggle="datepicker" data-type="add" class="fa fa-angle-right"></span>
+                          <div class="input-group input-datepicker">
+                            <input type="text" class="form-control" data-format="YYYY/MM/DD" placeholder="YYYY/MM/DD">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Go!</button>
+                            </span>
+                          </div>
+                          <span data-toggle="calendar" class="fa fa-calendar"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  
+                  <!--CALENDAR FROM STOP-->
+                  <!--CALENDAR END START-->
+                  <div id="container">
+                    <div class="row">
+                      <div class=".col-sm-4">
+                        <h3 id="calh3">To</h3>
+                        <hr/>
+                        <div class="date-picker" id="to-date" data-date="2016/04/28" data-keyboard="true">
+                          <div class="date-container pull-left">
+                            <h4 class="weekday">Thursday</h4>
+                            <h2 class="date">April 28th</h2>
+                            <h4 class="year pull-right">2016</h4>
+                          </div>
+                          <span data-toggle="datepicker" data-type="subtract" class="fa fa-angle-left"></span>
+                          <span data-toggle="datepicker" data-type="add" class="fa fa-angle-right"></span>
+                          <div class="input-group input-datepicker">
+                            <input type="text" class="form-control" data-format="YYYY/MM/DD" placeholder="YYYY/MM/DD">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Go!</button>
+                            </span>
+                          </div>
+                          <span data-toggle="calendar" class="fa fa-calendar"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  
+                  <!--CALENDAR END STOP-->
+                  <div class="graphs" align="center">
+                    <div>
+                      <h5 align="center" style="display:inline-block;">Today's total count:</h5>
+                      <h5 id="totalIn" style='margin-right: 10px;' class="numbers">0</h5>
+                      <h5 align="center" style="display:inline-block;">People Currently in The Room:</h5>
+                      <h5 id="currentNumber" class="numbers">0</h5>
+                    </div>
+                    <canvas style='margin-left: 5px; margin-right:5px' id="totalChart" width='900' height='300' ></canvas>
+                    <div style='margin-bottom: 10px;' id="totalLegend"></div>
+                  </div>
+                </div>
+                <!--<div>
+                <h4>Movement</h4>-->
+                  <!--<div class="graphs" align="center">
+                    <div>
+                      <h5 class="people">People Entering:</h5>
+                      <h5 id="peopleIn" class="numbers">0</h5>
+                      <h5 class="people">People exiting:</h5>
+                      <h5 id="peopleOut" class="numbers">0</h5>
+                    </div>
+                    <canvas style='margin-left: 5px;' id="trafficChart" width='900' height='300'></canvas>
+                    <div style='margin-bottom: 10px;' id="trafficLegend"></div>
+                  </div>
+                </div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<script>
+    $('#elektro').click(function(e) {
+      $('#stats').toggleClass('hidden');
+    });
+    </script>-->
+
+  </body>
+</html>

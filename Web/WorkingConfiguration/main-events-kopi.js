@@ -3,7 +3,7 @@
 // * Author: David Haylock & Oliver Humpage
 // * Creation Date: 20-11-2014
 // * Copyright: (c) 2015 by Watershed Arts Trust Ltd.
-/*var totalsData = {};*/
+
 var totalChart;
 var interval = 300;
 var events;
@@ -18,9 +18,11 @@ var labelLength = 0;
 //TODO: LABELS OPPDATERER SEG IKKE AV SEG SELV SELV OM VERDIENE BLIR SATT INN!!!
 function preLoadData()
 {
+	var start = document.getElementById('startDate').textContent;
+	var end = document.getElementById('endDate').textContent;
 	// Get the First Load of Data
 	$.ajax({
-		url:"http://www.matteoconti91.joomlafree.it/upload.php?get&interval="+interval,
+		url:"http://www.matteoconti91.joomlafree.it/upload.php?get&interval="+ interval + "&start=" + start + "&end=" + end,
 		async: true,
 		dataType: 'json',
 		type:'get',
@@ -65,24 +67,16 @@ function createTotalChart()
 			datasets: [
 		{
 			label: "People In Room",
-			fillColor: "rgba(0,77,255,.01)",
-			strokeColor: "rgba(0,77,255,1)",
-			pointColor: "rgba(0,77,255,1)",
+			fillColor: "rgba(66,139,202,.01)",
+			strokeColor: "rgba(66,139,202,1)",
+			pointColor: "rgba(66,139,202,1)",
 			pointStrokeColor: "#fff",
-			data: []
-		},
-		{
-			fillColor: "rgba(0,77,255,.01)",
-			strokeColor: "rgba(151,187,205,1)",
-			pointColor: "rgba(0,77,255,.01)",
-			pointStrokeColor: "rgba(0,77,255,.01)",
-			strokeWidth: 5,
 			data: []
 		}
 		]
 	},
 	latestLabel = totalsData.labels[6];
-    totalChart = new Chart(ctx).Line(totalsData, {animationSteps:15});
+    totalChart = new Chart(ctx).Line(totalsData);
 	preLoadData();
 }
 //--------------------------------------------------------------
@@ -92,9 +86,11 @@ function createTotalChart()
 //--------------------------------------------------------------
 function updateLabels(data)
 {
+	if (data.length != 0) {
 	document.getElementById("currentNumber").innerHTML = data[data.length-1].total;
 	/*document.getElementById("currentNumber").innerHTML = data[data.length-1];*/
 	document.getElementById("totalIn").innerHTML = data[data.length-1].totalin;
+	}
 }
 //--------------------------------------------------------------
 // *
@@ -103,6 +99,7 @@ function updateLabels(data)
 //--------------------------------------------------------------
 function updateTotals(data)
 {
+	if (data.length != 0) {
 	var totalDataLength = totalChart.datasets[0].points.length-1;
 	totalChart.datasets[0].points[totalDataLength].value = data[data.length-1].total;
 	if (totalDataLength-1 > labelLength) {
@@ -122,6 +119,7 @@ function updateTotals(data)
 	}
 	totalChart.update();
 }
+}
 //--------------------------------------------------------------
 // *
 // *	Function which checks for New data
@@ -129,8 +127,10 @@ function updateTotals(data)
 //--------------------------------------------------------------
 function updateValues()
 {
+	var start = document.getElementById('startDate').textContent;
+	var end = document.getElementById('endDate').textContent;
 	$.ajax({
-		url:"http://www.matteoconti91.joomlafree.it/upload.php?get&interval="+interval,
+		url:"http://www.matteoconti91.joomlafree.it/upload.php?get&interval="+ interval + "&start=" + start + "&end=" + end,
 		async:true,
 		dataType: 'json',
 		type:'get',
@@ -149,8 +149,11 @@ function updateValues()
 function addDataToCharts(data)
 {
 	// Probably a better way to do this
-	if (data[data.length-1].timekey.substring(11,16) == totalsData.labels[totalsData.labels.length-1])
+	if (data.length != 0) {
+	if (data[data.length-1].timekey.substring(11,16) == totalChart.datasets[0].points[totalChart.datasets[0].points.length-1].label)
 	{
+		/*console.log("den siste labelen er : " + totalChart.datasets[0].points[totalChart.datasets[0].points.length-1].label)*/
+		totalChart.update();
 	}
 	else
 	{
@@ -158,8 +161,9 @@ function addDataToCharts(data)
 		var totalDataLength = totalChart.datasets[0].points.length-2;
 		totalChart.datasets[0].points[totalDataLength].value = data[data.length-2].total;
 		totalChart.update();
-		totalChart.removeData();
+		/*totalChart.removeData();*/
 	}
+}
 	//FABFIVE: try to update labels automatically when new data arrives.
 	//updateLabels(data);
 }
@@ -179,5 +183,14 @@ $(document).ready(function(){
 	createTotalChart()
 	//set how often to look for new movement in milliseconds.
 	//could send in the interval to set how often the page should get new values for the graph.
-	setInterval(function(){updateValues()},10000);
+	setInterval(function(){
+		updateValues();
+		var start = document.getElementById('startDate').textContent;
+		var end = document.getElementById('endDate').textContent;
+		if(end < start) {
+			alert("End date can't be before start date");
+		}
+
+	},5000);
+
 });

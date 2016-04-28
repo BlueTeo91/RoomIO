@@ -85,6 +85,8 @@ elseif (isset($_GET['get'])) {
 				ORDER BY timekey ASC
 			";
 
+
+
 	/* We can modify just WHERE such that we produce a list of values on the days and time window that we choose
 	is sufficient to retrieve day and time intervals from data picker as the $interval and insert them in the query*/
 	/*
@@ -100,6 +102,7 @@ elseif (isset($_GET['get'])) {
 				ORDER BY timekey ASC
 			";
 	*/
+
 	$get = $DBH->prepare($query);
 	$get->execute();
 
@@ -108,14 +111,17 @@ elseif (isset($_GET['get'])) {
 		exit;
 	}
 
+//	if ($get->fetchColumn() == 0) {
+//		echo "[]";
+//		exit;
+//	}
 	$rows = array();
 	$runningtotal = 0;
 	$runningtotalin = 0;
 	$rowCount = 0;
 	$totalin = 0;
-
 	while ($row = $get->fetch(PDO::FETCH_ASSOC)) {
-//		echo "I'm fetching!!! #: ".$rowCount;
+		echo "I'm fetching!!";
 		$runningtotal += $row['movement'];
 		$row['total'] = $runningtotal;
 		$totalin += $row['peoplein'];
@@ -128,19 +134,14 @@ elseif (isset($_GET['get'])) {
 	}
 	$endtime = time() - (time() % $interval);
 
-//	echo "starttime: ".$starttime;
-//	echo "endtime: ".$endtime;
-
-	if ($rowCount == 0) {
-		echo "[]"; //no data in the DB (answer to query NULL)
-		exit;
-	}
-
 	if(!($endtime >= $starttime)) {
-		$endtime = $starttime; //check to avoid endtime < starttime and avoid fuck up the for loop
+		$endtime = $starttime;
 	}
+	echo "starttime: ".$starttime;
+	echo "endtime: ".$endtime;
 
 	for ($t = $starttime; $t <= $endtime; $t += $interval) {
+
 		$dt = date("Y-m-d H:i:s",$t);
 		if (!isset($rows[$dt])) {
 			$rows[$dt] = array("timekey" => $dt, "movement" => 0, "peoplein" => 0, "peopleout" => 0, "total" => $runningtotal, "totalin" => $runningtotalin);
@@ -153,6 +154,8 @@ elseif (isset($_GET['get'])) {
 	ksort($rows); // sort
 	$rows = array_values($rows); // change back into indexed
 
+
 	echo json_encode($rows);
+
 }
 ?>

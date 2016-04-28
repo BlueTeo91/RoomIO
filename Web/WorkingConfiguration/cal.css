@@ -8,9 +8,18 @@ body {
     margin-left: 0.1em;   
 }
 
-#calh2 {
-    color:rgb(43, 129, 226);
-    margin-top: 0px
+#calh3{
+    margin-top: -5px;
+    margin-bottom: -10px;
+}
+
+#container {
+    width: 24%;
+    margin-top: -25px;
+    margin-bottom: 0px;
+    margin-right: 5%;
+    margin-left: 113px;
+    display: inline-block;
 }
 
 .date-picker,
@@ -18,8 +27,7 @@ body {
     position: relative;
     display: inline-block;
     width: 100%;
-    /*color: rgb(75, 77, 78);*/
-    color: rgb(43, 129, 226);
+    color: #428bca;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
