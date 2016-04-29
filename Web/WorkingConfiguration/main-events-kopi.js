@@ -191,6 +191,6 @@ $(document).ready(function(){
 			alert("End date can't be before start date");
 		}
 
-	},5000);
+	},1000);
 
 });
