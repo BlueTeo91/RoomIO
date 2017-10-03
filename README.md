@@ -1,4 +1,4 @@
-# RoomIO
+# RS_2GSimulator
 
 Hi everybody! Remember a few simple rules for using the repository:
 
@@ -8,7 +8,7 @@ Hi everybody! Remember a few simple rules for using the repository:
 
   git pull
 
-- If you want to upload some modify:
+- If you want to upload something:
 
   git add "file name"
 
@@ -16,9 +16,9 @@ Hi everybody! Remember a few simple rules for using the repository:
 
   git push origin master
 
-2 ) comments on in any case the code
+2 ) ALWAYS!!! comment the code
 
-2 ) if you do not know how to use GitHub read the Wiki, or ask XD
+3 ) if you do not know how to use GitHub read the Wiki, or ask XD
 
 
-![DOH](http://www.myitalianchef.com/wp-content/uploads/2015/07/homer-simpson.jpg)
+![DOH](https://github.com/BlueTeo91/RS_2GSimulator/blob/master/homer.jpeg)
