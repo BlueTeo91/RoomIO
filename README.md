@@ -1,4 +1,4 @@
-# RS_2GSimulator
+# RoomIO
 
 Hi everybody! Remember a few simple rules for using the repository:
 
@@ -21,4 +21,4 @@ Hi everybody! Remember a few simple rules for using the repository:
 3 ) if you do not know how to use GitHub read the Wiki, or ask XD
 
 
-![DOH](https://github.com/BlueTeo91/RS_2GSimulator/blob/master/homer.jpeg)
+![DOH](https://github.com/BlueTeo91/RoomIO/blob/master/homer.jpeg)
